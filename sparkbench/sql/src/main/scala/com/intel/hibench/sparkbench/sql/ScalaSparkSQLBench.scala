@@ -36,8 +36,9 @@ object ScalaSparkSQLBench{
     val sparkConf = new SparkConf().setAppName(workload_name)
     val sc = new SparkContext(sparkConf)
     val hc = new HiveContext(sc)
-
-    val _sql = scala.io.Source.fromFile(sql_file).mkString
+    val _sql = scala.io.Source.fromFile(sql_file).mkString // data/HiBench/report/scan/spark/rankings_uservisits_scan.hive
+    println(_sql.split(';'))
+    _sql.split(';').foreach { x => println(x)}
     _sql.split(';').foreach { x =>
       if (x.trim.nonEmpty)
         hc.sql(x)
